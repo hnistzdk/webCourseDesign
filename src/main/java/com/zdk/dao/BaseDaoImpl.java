@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author zdk
  * @date 2021/12/12 15:55
+ * 基本Dao方法实现
  */
 public class BaseDaoImpl implements BaseDao{
     /**
@@ -43,7 +44,7 @@ public class BaseDaoImpl implements BaseDao{
                 object = new JSONObject();
                 for (int i = 1; i <= fileNum; i++) {
                     String columnName = resultSetMetaData.getColumnLabel(i);
-                    object.put(columnName, resultSet.getObject(columnName));
+                    object.set(columnName, resultSet.getObject(columnName));
                 }
                 list.add(BeanUtil.toBean(object, t));
             }

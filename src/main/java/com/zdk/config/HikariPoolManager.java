@@ -4,7 +4,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -26,7 +25,7 @@ public class HikariPoolManager {
         }
         //初始化HikariConfig配置
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(prop.getProperty("jdbcUrl"));
+        config.setJdbcUrl(prop.getProperty("url"));
         config.setUsername(prop.getProperty("username"));
         config.setPassword(prop.getProperty("password"));
         config.addDataSourceProperty("cachePrepStmts", prop.getProperty("dataSource.cachePrepStmts"));
