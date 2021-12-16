@@ -16,4 +16,11 @@ public interface UserService {
      * @return
      */
     ApiResponse login(String username, String password);
+
+    /**
+     * 通过username查询用户
+     * @param username
+     * @return
+     */
+    ApiResponse queryUser(String username);
 }

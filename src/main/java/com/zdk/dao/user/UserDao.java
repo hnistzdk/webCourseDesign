@@ -15,4 +15,11 @@ public interface UserDao {
      * @return
      */
     User login(String username, String password);
+
+    /**
+     * 根据username查询用户
+     * @param username
+     * @return
+     */
+    User queryUser(String username);
 }

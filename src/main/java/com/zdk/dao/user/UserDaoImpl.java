@@ -26,4 +26,10 @@ public class UserDaoImpl implements UserDao {
         String sql = "select * from user where username = ? and password = ?";
         return baseDao.queryRow(User.class, sql, username,password);
     }
+
+    @Override
+    public User queryUser(String username) {
+        String sql = "select * from user where username = ?";
+        return baseDao.queryRow(User.class, sql, username);
+    }
 }

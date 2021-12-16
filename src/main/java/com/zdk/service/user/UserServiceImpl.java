@@ -37,4 +37,13 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
         return ApiResponse.fail("账号或密码错误");
     }
+
+    @Override
+    public ApiResponse queryUser(String username) {
+        User user = userDao.queryUser(username);
+        if (user == null){
+            return ApiResponse.fail("用户不存在");
+        }
+        return ApiResponse.success(user);
+    }
 }

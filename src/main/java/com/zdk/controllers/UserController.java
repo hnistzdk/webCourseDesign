@@ -64,4 +64,13 @@ public class UserController extends BaseController{
         returnJson(resp, loginRes);
         return;
     }
+
+    /**
+     * 注册接口
+     * @param req
+     * @param resp
+     */
+    private void register(HttpServletRequest req, HttpServletResponse resp) {
+
+    }
 }
