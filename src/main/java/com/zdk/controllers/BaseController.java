@@ -1,11 +1,18 @@
 package com.zdk.controllers;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.convert.impl.StringConverter;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.json.JSONUtil;
 import com.zdk.utils.IParaValidator;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
@@ -480,4 +487,21 @@ public class BaseController extends HttpServlet implements IParaValidator {
         return success;
     }
 
+    public String getStr(HttpServletRequest request,String paramName){
+        return Convert.toStr(request.getParameter(paramName));
+    }
+    public Integer getInt(HttpServletRequest request,String paramName){
+        return Convert.toInt(request.getParameter(paramName));
+    }
+
+    /**
+     * 返回JSON数据
+     * @param response
+     * @param object
+     * @throws IOException
+     */
+    public void returnJson(HttpServletResponse response, Object object) throws IOException {
+        PrintWriter writer = response.getWriter();
+        writer.write(JSONUtil.parseObj(object).toString());
+    }
 }

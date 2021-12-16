@@ -18,7 +18,7 @@ public interface BaseDao {
      * @param <T>
      * @return
      */
-    <T> List<T> queryRows(Class<T> t, String sql, Object[] params);
+    <T> List<T> queryRows(Class<T> t, String sql, Object ...params);
 
     /**
      * 查询单条数据
@@ -28,7 +28,7 @@ public interface BaseDao {
      * @param <T>
      * @return
      */
-    <T> T queryRow(Class<T> t,String sql,Object[] params);
+    <T> T queryRow(Class<T> t,String sql,Object ...params);
 
     /**
      * 分页
@@ -53,10 +53,10 @@ public interface BaseDao {
     Integer getCount(String countSql,Object[] params);
 
     /**
-     * 插入数据
+     * 更新数据(增删改)
      * @param insertSql
      * @param params
      * @return
      */
-    Integer insert(String insertSql,Object[] params);
+    Integer update(String insertSql,Object[] params);
 }

@@ -15,6 +15,14 @@ import java.util.List;
  * 基本Dao方法实现
  */
 public class BaseDaoImpl implements BaseDao{
+    public BaseDaoImpl() {
+    }
+    private static final BaseDao instance = new BaseDaoImpl();
+
+    public static BaseDao getInstance() {
+        return instance;
+    }
+
     /**
      * 查询List
      * @param t
@@ -24,7 +32,7 @@ public class BaseDaoImpl implements BaseDao{
      * @return
      */
     @Override
-    public <T> List<T> queryRows(Class<T> t, String sql, Object[] params) {
+    public <T> List<T> queryRows(Class<T> t, String sql, Object ...params) {
         List<T> list = new ArrayList<>();
         Connection connection = HikariPoolManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -66,7 +74,7 @@ public class BaseDaoImpl implements BaseDao{
      * @return
      */
     @Override
-    public <T> T queryRow(Class<T> t, String sql, Object[] params) {
+    public <T> T queryRow(Class<T> t, String sql, Object ...params) {
         List<T> list = queryRows(t, sql, params);
         return list.size() > 0 ? list.get(0) : null;
     }
@@ -159,7 +167,7 @@ public class BaseDaoImpl implements BaseDao{
     }
 
     @Override
-    public Integer insert(String insertSql,Object[] params) {
+    public Integer update(String insertSql,Object[] params) {
         Connection connection = HikariPoolManager.getConnection();
         PreparedStatement preparedStatement = null;
         int update = 0;
