@@ -64,7 +64,7 @@
                         cancelButtonText:'取消',
                         then: function () {
                             setTimeout(function () {
-                                window.location.href = '/admin/index';
+                                window.location.href = '${path}/page/index.jsp';
                             }, 500);
                         }
                     })
