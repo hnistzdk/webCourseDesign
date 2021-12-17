@@ -1,6 +1,5 @@
 package com.zdk.service.user;
 
-import com.zdk.pojo.User;
 import com.zdk.utils.ApiResponse;
 
 /**

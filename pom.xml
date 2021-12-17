@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zdk</groupId>
-    <artifactId>web-course-design</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>webDesign</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -18,6 +18,10 @@
         <HikariCPVersion>4.0.3</HikariCPVersion>
         <commons-lang3Version>3.12.0</commons-lang3Version>
         <junitVersion>4.13.2</junitVersion>
+        <servletVersion>4.0.1</servletVersion>
+        <jspVersion>2.2</jspVersion>
+        <jstlVersion>1.2</jstlVersion>
+        <standardVersion>1.1.2</standardVersion>
     </properties>
     <dependencies>
         <dependency>
@@ -86,26 +90,26 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <version>${servletVersion}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstlVersion}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/taglibs/standard -->
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
-            <version>1.1.2</version>
+            <version>${standardVersion}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
-            <version>2.2</version>
+            <version>${jspVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -114,89 +118,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <!--log4j2问题解决start-->
-            <!-- Maven Shade Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.3</version>
-
-                <configuration>
-                    <createDependencyReducedPom>true</createDependencyReducedPom>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer
-                                        implementation="com.github.edwgiz.mavenShadePlugin.log4j2CacheTransformer.PluginsCacheFileTransformer"/>
-                            </transformers>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                        <exclude>**/Log4j2Plugins.dat</exclude>
-                                    </excludes>
-
-                                </filter>
-                            </filters>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.github.edwgiz</groupId>
-                        <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
-                        <version>2.6.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <!--log4j2问题解决end-->
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                    <include>**/*.yaml</include>
-                    <include>**/*.yml</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <!--            ================-->
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                    <include>**/*.yaml</include>
-                    <include>**/*.yml</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
 </project>
