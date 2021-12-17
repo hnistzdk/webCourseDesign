@@ -25,6 +25,7 @@ public class HikariPoolManager {
         }
         //初始化HikariConfig配置
         HikariConfig config = new HikariConfig();
+        config.setDriverClassName(prop.getProperty("driver"));
         config.setJdbcUrl(prop.getProperty("url"));
         config.setUsername(prop.getProperty("username"));
         config.setPassword(prop.getProperty("password"));

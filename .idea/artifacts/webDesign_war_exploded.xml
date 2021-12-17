@@ -2,10 +2,9 @@
   <artifact type="exploded-war" name="webDesign:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/webDesign_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="webDesign/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="webDesign" />
+          <element id="module-output" name="webCourseDesign" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: cn.hutool:hutool-all:5.7.16" />
@@ -27,6 +26,7 @@
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="webCourseDesign/web/Web" />
     </root>
   </artifact>
 </component>
