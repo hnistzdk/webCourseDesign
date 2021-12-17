@@ -27,7 +27,6 @@ public class CharsetFilter implements Filter {
         int i = url.lastIndexOf(".");
         if (i != -1){
             String type = url.substring(i);
-            System.out.println("type = " + type);
             if (type.equals(".js")){
                 servletResponse.setContentType("application/javascript");
             }

@@ -59,7 +59,7 @@ public class UserController extends BaseController{
         User user = Convert.convert(User.class, loginRes.getData());
         HttpSession session = req.getSession();
         String ip = IpKit.getIpAddressByRequest(req);
-        String userSessionKey = ip+":"+user.getUsername();
+        String userSessionKey = ip+":userInfo";
         session.setAttribute(userSessionKey,user);
         returnJson(resp, loginRes);
         return;

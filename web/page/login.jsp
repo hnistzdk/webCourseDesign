@@ -25,10 +25,11 @@
 <body class="text-center">
 <form id="loginForm" class="form-signin" onsubmit="return false">
     <img class="mb-4" src="../static/img/logo.jpg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal" content="请登录">请登录</h1>
-    <!--			如果msg值不为空才不显示消息-->
+    <h1 class="h3 mb-3 font-weight-normal" content="请登录">网上银行系统</h1>
     <input type="hidden" name="requestMethod" value="login">
-    <p style="color: red" content="${msg}" c:if="${not empty msg}"></p>
+    <c:if test="${not empty notLoginMsg}">
+        <span style="color: red">${notLoginMsg}</span>
+    </c:if>
     <label class="sr-only" content="">Username</label>
     <input type="text" name="username" class="form-control" placeholder="请输入用户名" required="required" autofocus="">
     <label class="sr-only" content="">Password</label>
