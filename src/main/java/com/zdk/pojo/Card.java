@@ -8,16 +8,17 @@ import lombok.NoArgsConstructor;
 /**
  * @Description
  * @Author zdk
- * @Date 2021/12/16 10:23
+ * @Date 2021/12/23 10:37
+ * 银行卡
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class Card {
     private Integer id;
-    private String username;
-    private String password;
-    private String trueName;
-    private String role;
+    private String number;
+    private Integer balance;
+    private Integer ownerId;
+    private String ownerName;
 }

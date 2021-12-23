@@ -21,7 +21,7 @@ import java.io.IOException;
  * @Date 2021/12/16 10:26
  * 登录、注册等
  */
-@WebServlet(name = "userController",urlPatterns = "/user")
+@WebServlet(name = "userController",urlPatterns = {"/user","/user/**"})
 public class UserController extends BaseController{
     private final UserService userService = UserServiceImpl.getInstance();
 

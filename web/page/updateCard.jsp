@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
-  User: zdk
-  Date: 2021/12/17
-  Time: 19:42
+  User: fengzhu
+  Date: 2021/12/23
+  Time: 11:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,11 +13,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>首页</title>
-    <!-- Bootstrap core CSS -->
+    <title>Dashboard Template for Bootstrap</title>
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="../static/css/dashboard.css" rel="stylesheet">
     <style type="text/css">
         /* Chart.js */
@@ -47,26 +43,23 @@
         }
     </style>
 </head>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div>
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company name</a>
-                <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-                <ul class="navbar-nav px-3">
-                    <li class="nav-item text-nowrap">
-                        <a class="nav-link" href="${path}/user/logout">注销</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+<div>
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company name</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/user/logout">注销</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 <div class="container-fluid">
     <div class="row">
+        <!--				commons.html中的sidebar组件-->
         <div>
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
@@ -81,7 +74,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="${active=='list.html'?'nav-link active':'nav-link'}" href="${path}/card/list">
+                            <a class="${active=='list.html'?'nav-link active':'nav-link'}" href="/page/cardList.jsp">
                                 我的银行卡
                             </a>
                         </li>
@@ -91,30 +84,42 @@
         </div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+            <form action="/card/updateCard" method="post">
+                <input type="hidden" value="${employee.getId()}" name="id">
+                <div class="form-group">
+                    <label>LastName</label>
+                    <input value="${employee.getLastName()}" type="text" name="lastName" class="form-control">
                 </div>
-                <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input value="${employee.getEmail()}" type="email" name="email" class="form-control">
                 </div>
-            </div>
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <a class="nav-link" href="/user/logout">注销</a>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="form-check form-check-inline">
+                        <input checked="${employee.getGender()==1}" class="form-check-input" type="radio" name="gender" value="1">
+                        <label class="form-check-label">男</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input checked="${employee.getGender()==0}" class="form-check-input" type="radio" name="gender" value="0">
+                        <label class="form-check-label">女</label>
                     </div>
                 </div>
-            </div>
-            <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
+                <div class="form-group">
+                    <label>Department</label>
+                    <select class="form-control" name="department.id">
+                        <option selected="${department.getId()==employee.getDepartment().getId()}"
+                                each="department:${departments}"
+                                text="${department.getDepartmentName()}"
+                                value="${department.getId()}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">修改</button>
+            </form>
         </main>
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript" src="../static/js/jquery-3.2.1.slim.min.js" ></script>
 <script type="text/javascript" src="../static/js/popper.min.js" ></script>
 <script type="text/javascript" src="../static/js/bootstrap.min.js" ></script>
@@ -158,5 +163,4 @@
 </script>
 
 </body>
-
 </html>

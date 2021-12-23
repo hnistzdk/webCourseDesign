@@ -20,7 +20,9 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String ip = IpKit.getIpAddressByRequest(request);
         String sessionKey = ip+":userInfo";
-        Object user = request.getSession().getAttribute(sessionKey);
+        //在servletContext中查询用户是否登录
+        Object user = request.getServletContext().getAttribute(sessionKey);
+//        Object user = request.getSession().getAttribute(sessionKey);
         if (user == null) {
             request.setAttribute("notLoginMsg", "请先登录");
             request.getRequestDispatcher("/page/login.jsp").forward(request, response);
