@@ -4,7 +4,9 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.json.JSONUtil;
+import com.zdk.pojo.User;
 import com.zdk.utils.IParaValidator;
+import com.zdk.utils.IpKit;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServlet;
@@ -500,7 +502,20 @@ public class BaseController extends HttpServlet implements IParaValidator {
      * @throws IOException
      */
     public void returnJson(HttpServletResponse response, Object object) throws IOException {
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter writer = response.getWriter();
         writer.write(JSONUtil.parseObj(object).toString());
+    }
+
+    /**
+     * 获取当前登录用户
+     * @param request
+     * @return
+     */
+    public User getLoginUser(HttpServletRequest request){
+        String ip = IpKit.getIpAddressByRequest(request);
+        String userSessionKey = ip+":userInfo";
+        Object attribute = request.getSession().getAttribute(userSessionKey);
+        return Convert.convert(User.class, attribute);
     }
 }

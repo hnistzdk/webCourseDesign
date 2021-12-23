@@ -46,4 +46,16 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
         return ApiResponse.success(user);
     }
+
+    @Override
+    public ApiResponse register(String username, String password, String trueName) {
+        if (notOk(username)||notOk(password)||notOk(trueName)){
+            return ApiResponse.fail("参数错误");
+        }
+        User user = userDao.queryUser(username);
+        if (user != null){
+            return ApiResponse.fail("该用户名已存在,请重新填写");
+        }
+        return ApiResponse.result(userDao.register(username, password, trueName)>0,"注册失败");
+    }
 }

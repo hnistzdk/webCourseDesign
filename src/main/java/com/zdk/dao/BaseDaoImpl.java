@@ -186,4 +186,48 @@ public class BaseDaoImpl implements BaseDao{
         }
         return update;
     }
+
+    @Override
+    public Boolean transferAccounts(String origin, String target, Integer money) {
+        Connection connection = HikariPoolManager.getConnection();
+        try {
+            //开启事务
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String updateOrigin = "update card set balance = balance-? where number = ?";
+        String updateTarget = "update card set balance = balance+? where number = ?";
+        Object[] originParams = new Object[]{money,origin};
+        Object[] targetParams = new Object[]{money,target};
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(updateOrigin);
+            for (int i = 0; i < originParams.length; i++) {
+                preparedStatement.setObject(i + 1, originParams[i]);
+            }
+            //源 减
+            preparedStatement.executeUpdate();
+
+            preparedStatement = connection.prepareStatement(updateTarget);
+            for (int i = 0; i < targetParams.length; i++) {
+                preparedStatement.setObject(i + 1, targetParams[i]);
+            }
+            //目的 增
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            //回滚
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        }finally {
+            closeResource(connection, preparedStatement, null);
+        }
+        return true;
+    }
 }

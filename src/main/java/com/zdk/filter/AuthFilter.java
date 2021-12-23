@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author zdk
  * @date 2021/12/17 19:41
  */
-@WebFilter(filterName = "authFilter",urlPatterns = {"/page/index.jsp"})
+@WebFilter(filterName = "BFilter",urlPatterns = {"/page/index.jsp","/card/list"})
 public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

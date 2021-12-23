@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="MyFun" uri="www.mylib.com/mylib" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -49,18 +50,6 @@
 </head>
 
 <body>
-<div>
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">Company name</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="/user/logout">注销</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-
 <div class="container-fluid">
     <div class="row">
         <div>
@@ -86,7 +75,16 @@
             </nav>
         </div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2><a class="btn btn-sm btn-success" href="${path}/card/add">添加银行卡</a></h2>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">我的银行卡</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <a class="nav-link" href="/user/logout">注销</a>
+                    </div>
+                </div>
+            </div>
+            <h2><button class="btn btn-sm btn-success" onclick="addCardDialog()">添加银行卡</button></h2>
+            <h2><button class="btn btn-sm btn-success" onclick="rechargeDialog()">转账</button></h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -94,6 +92,9 @@
                         <th>id</th>
                         <th>卡号</th>
                         <th>余额(元)</th>
+                        <c:if test="${user.role == '管理员'}">
+                            <th>持卡人姓名</th>
+                        </c:if>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -102,9 +103,12 @@
                         <tr>
                             <td>${card.getId()}</td>
                             <td>${card.getNumber()}</td>
-                            <td>${card.getBalance()}</td>
+                            <td>${MyFun:convertBalance(card.balance)}</td>
+                            <c:if test="${user.role == '管理员'}">
+                                <td>${card.getOwnerName()}</td>
+                            </c:if>
                             <td>
-                                <button class="btn btn-sm btn-primary" onclick="editCardDialog(${card.id})">编辑</button>
+                                <button class="btn btn-sm btn-primary" onclick="editCardDialog(${card.id})">充值</button>
                                 <button class="btn btn-sm btn-danger" onclick="deleteCard(${card.id})">删除</button>
                             </td>
                         </tr>
@@ -133,6 +137,24 @@
             width: "50%",
             height: "50%",
             url: "/card/editCard/"+id,
+        })
+    }
+
+    function addCardDialog() {
+        DialogUtil.openNewDialog({
+            title: "添加银行卡信息",
+            width: "50%",
+            height: "50%",
+            url: "/card/addCard",
+        })
+    }
+
+    function rechargeDialog() {
+        DialogUtil.openNewDialog({
+            title: "转账",
+            width: "50%",
+            height: "50%",
+            url: "/card/transferAccountsCard",
         })
     }
 

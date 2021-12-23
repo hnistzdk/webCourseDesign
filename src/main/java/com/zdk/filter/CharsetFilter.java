@@ -11,7 +11,7 @@ import java.io.IOException;
  * @Author zdk
  * @Date 2021/12/17 13:28
  */
-@WebFilter(filterName = "charsetFilter",urlPatterns = "/*")
+@WebFilter(filterName = "AFilter",urlPatterns = "/*")
 public class CharsetFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

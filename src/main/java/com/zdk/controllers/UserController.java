@@ -21,20 +21,29 @@ import java.io.IOException;
  * @Date 2021/12/16 10:26
  * 登录、注册等
  */
-@WebServlet(name = "userController",urlPatterns = {"/user","/user/**"})
+@WebServlet(name = "userController",urlPatterns = {"/user","/user/*"})
 public class UserController extends BaseController{
     private final UserService userService = UserServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String url = req.getRequestURL().toString();
+        if (url.contains("/user/logout")){
+            logout(req);
+            resp.sendRedirect("/page/login.jsp");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestMethod = getStr(req, "requestMethod");
-        if (requestMethod.equals("login")){
+        if (isOk(requestMethod) && requestMethod.equals("login")){
             login(req, resp);
+        }
+        String url = req.getRequestURL().toString();
+        //注册
+        if (url.contains("/user/register")){
+            returnJson(resp, register(req));
         }
     }
 
@@ -66,11 +75,24 @@ public class UserController extends BaseController{
     }
 
     /**
-     * 注册接口
+     * 注销
      * @param req
-     * @param resp
      */
-    private void register(HttpServletRequest req, HttpServletResponse resp) {
+    private void logout(HttpServletRequest req){
+        HttpSession session = req.getSession();
+        String ip = IpKit.getIpAddressByRequest(req);
+        String userSessionKey = ip+":userInfo";
+        session.removeAttribute(userSessionKey);
+    }
 
+    /**
+     * 注册
+     * @param req
+     */
+    private ApiResponse register(HttpServletRequest req) {
+        String username = getStr(req, "username");
+        String password = getStr(req, "password");
+        String trueName = getStr(req, "trueName");
+        return userService.register(username, password, trueName);
     }
 }

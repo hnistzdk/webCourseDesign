@@ -59,4 +59,13 @@ public interface BaseDao {
      * @return
      */
     Integer update(String insertSql,Object[] params);
+
+    /**
+     * 转账特例 需要事务
+     * @param origin
+     * @param target
+     * @param money
+     * @return
+     */
+    Boolean transferAccounts(String origin,String target,Integer money);
 }

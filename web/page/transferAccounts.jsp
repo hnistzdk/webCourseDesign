@@ -1,17 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
-  User: fengzhu
+  User: zdk
   Date: 2021/12/23
-  Time: 11:24
+  Time: 19:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="MyFun" uri="www.mylib.com/mylib" %>
-<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard Template for Bootstrap</title>
+    <title>转账</title>
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/signin.css" rel="stylesheet">
@@ -29,49 +27,46 @@
 <div class="container-fluid">
     <div class="row">
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <form class="form-horizontal m-t-20" method="post" id="updateCardForm" onsubmit="return false">
-                <input name="id" value="${card.getId()}" type="hidden">
+            <form class="form-horizontal m-t-20" method="post" id="transferAccountsForm" onsubmit="return false">
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <label class="col-sm-2 col-form-label">卡号</label>
-                        <input class="input-lg input-border" disabled name="number" value="${card.number}" type="text" required="" placeholder="卡号"/>
+                        <label class="col-sm-2 col-form-label">源卡号</label>
+                        <input class="input-lg input-border" id="origin" name="origin" value="" type="text" required="" placeholder="源卡号"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <label class="col-sm-2 col-form-label">余额</label>
-                        <input class="input-lg input-border" disabled name="" value="${MyFun:convertBalance(card.balance)}" type="text" required="" placeholder="余额"/>
-                        <input class="input-lg input-border" name="balance" value="${MyFun:convertBalance(card.balance)}" type="hidden" required="" placeholder="余额"/>
+                        <label class="col-sm-2 col-form-label">目的卡号</label>
+                        <input class="input-lg input-border" id="target" name="target" value="" type="text" required="" placeholder="目的卡号"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <label class="col-sm-2 col-form-label">充值金额(元)</label>
-                        <input class="input-lg input-border" name="recharge" value="" type="text" required="" placeholder="充值金额"/>
+                        <label class="col-sm-2 col-form-label">转账金额</label>
+                        <input class="input-lg input-border" name="money" value="" type="text" required="" placeholder="转账金额"/>
                     </div>
                 </div>
             </form>
             <div class="form-group text-center">
-                <button type="button" onclick="updateCard()" class="btn btn-primary">提交</button>
+                <button type="button" onclick="addCard()" class="btn btn-primary">提交</button>
             </div>
         </main>
     </div>
 </div>
 
-<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js" ></script>
+<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
 <script type="text/javascript" src="/static/js/popper.min.js" ></script>
-<%--<script src="../static/js/jquery.min.js"></script>--%>
 <script src="/static/js/jquery-3.5.1.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/base.js" charset="utf-8"></script>
 <script>
     let tale = new $.tale();
     //编辑角色
-    function updateCard() {
+    function addCard() {
         $.ajax({
-            url:"/card/updateCard",
+            url:"/card/transferAccounts",
             type:"post",
-            data:$('#updateCardForm').serialize(),
+            data:$('#transferAccountsForm').serialize(),
             success:function (data) {
                 if(data.code == 200){
                     tale.alertOk({
@@ -83,14 +78,7 @@
                         }
                     })
                 }else{
-                    tale.alertError({
-                        text:data.msg,
-                        then:function () {
-                            setTimeout(function () {
-                                parent.reloadCurrentPage()
-                            }, 500);
-                        }
-                    })
+                    tale.alertError(data.msg)
                 }
             }
         })

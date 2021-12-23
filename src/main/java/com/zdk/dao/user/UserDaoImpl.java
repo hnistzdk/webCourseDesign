@@ -32,4 +32,11 @@ public class UserDaoImpl implements UserDao {
         String sql = "select * from user where username = ?";
         return baseDao.queryRow(User.class, sql, username);
     }
+
+    @Override
+    public Integer register(String username, String password, String trueName) {
+        String sql = "insert into user(username,password,true_name,role) values(?,?,?,?)";
+        Object[] params = new Object[]{username,password,trueName,"普通用户"};
+        return baseDao.update(sql, params);
+    }
 }

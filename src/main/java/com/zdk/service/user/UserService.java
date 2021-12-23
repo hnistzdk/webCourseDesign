@@ -22,4 +22,13 @@ public interface UserService {
      * @return
      */
     ApiResponse queryUser(String username);
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @param trueName
+     * @return
+     */
+    ApiResponse register(String username,String password,String trueName);
 }

@@ -30,16 +30,25 @@
     <c:if test="${not empty notLoginMsg}">
         <span style="color: red">${notLoginMsg}</span>
     </c:if>
-    <label class="sr-only" content="">Username</label>
-    <input type="text" name="username" class="form-control" placeholder="请输入用户名" required="required" autofocus="">
-    <label class="sr-only" content="">Password</label>
-    <input type="password" name="password" class="form-control" placeholder="请输入密码" required="required">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">用户名</label>
+        <div class="col">
+            <input type="text" name="username" class="form-control" placeholder="请输入用户名" required="required" autofocus="">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">密码</label>
+        <div class="col">
+            <input type="password" name="password" class="form-control" placeholder="请输入密码" required="required">
+        </div>
+    </div>
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" name="rememberMe" value="remember-me">记住我
         </label>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="checkForm()">登录</button>
+    <a class="btn btn-lg btn-primary btn-block" href="/page/register.jsp">注册</a>
 </form>
 </body>
 </html>
@@ -56,7 +65,6 @@
             type:"post",
             data:$('#loginForm').serialize(),
             success:function (data) {
-                data = JSON.parse(data);
                 console.log(data)
                 if(data.code == 200){
                     tale.alertOk({

@@ -22,4 +22,13 @@ public interface UserDao {
      * @return
      */
     User queryUser(String username);
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @param trueName
+     * @return
+     */
+    Integer register(String username,String password,String trueName);
 }
