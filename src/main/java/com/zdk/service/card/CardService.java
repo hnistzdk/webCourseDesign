@@ -16,4 +16,11 @@ public interface CardService {
      * @return
      */
     List<Card> getCardList(Integer userId);
+
+    /**
+     * 根据id获取卡信息
+     * @param id
+     * @return
+     */
+    Card getCardById(Integer id);
 }

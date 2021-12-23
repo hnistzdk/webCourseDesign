@@ -1,5 +1,7 @@
 package com.zdk.controllers;
 
+import cn.hutool.core.convert.Convert;
+import com.zdk.pojo.Card;
 import com.zdk.pojo.User;
 import com.zdk.service.card.CardService;
 import com.zdk.service.card.CardServiceImpl;
@@ -29,6 +31,14 @@ public class CardController extends BaseController{
             User user = (User) req.getServletContext().getAttribute(userSessionKey);
             req.setAttribute("cards",cardService.getCardList(user.getId()));
             req.getRequestDispatcher("/page/cardList.jsp").forward(req, resp);
+        }else if (url.contains("/card/editCard")){
+            int i = url.lastIndexOf("/");
+            String idStr = url.substring(i + 1);
+            Integer id = Convert.toInt(idStr);
+            Card card = cardService.getCardById(id);
+            req.setAttribute("card", card);
+
+            req.getRequestDispatcher("/page/updateCard.jsp").forward(req, resp);
         }
     }
 

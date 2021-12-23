@@ -104,8 +104,8 @@
                             <td>${card.getNumber()}</td>
                             <td>${card.getBalance()}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="${path}/card/edit/${card.id}">编辑</a>
-                                <a class="btn btn-sm btn-danger" href="${path}/card/delete/${card.id}">删除</a>
+                                <button class="btn btn-sm btn-primary" onclick="editCardDialog(${card.id})">编辑</button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteCard(${card.id})">删除</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -119,43 +119,44 @@
 
 <script type="text/javascript" src="../static/js/jquery-3.2.1.slim.min.js" ></script>
 <script type="text/javascript" src="../static/js/popper.min.js" ></script>
-<script type="text/javascript" src="../static/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="../static/plugins/jbolt-admin.js"></script>
+<script type="text/javascript" src="../static/plugins/layer/layer.js"></script>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/jquery-3.5.1.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/base.js" charset="utf-8"></script>
 
-
-<script type="text/javascript" src="../static/js/feather.min.js" ></script>
 <script>
-    feather.replace()
-</script>
+    function editCardDialog(id) {
+        DialogUtil.openNewDialog({
+            title: "编辑银行卡信息",
+            width: "50%",
+            height: "50%",
+            url: "/card/editCard/"+id,
+        })
+    }
 
-<script type="text/javascript" src="../static/js/Chart.min.js" ></script>
-<script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
+    let tale = new $.tale();
+    function deleteCard(id) {
+        tale.alertConfirm({
+            title: '确定删除该银行卡吗?',
+            then: function () {
+                $.ajax({
+                    url: '/card/deleteCard',
+                    type: "post",
+                    data: {id: id},
+                    success: function (result) {
+                        result = JSON.parse(result);
+                        if (result && result.code == 200) {
+                            tale.alertOkAndReload('删除成功');
+                        } else {
+                            tale.alertError(result.msg || '删除失败');
+                        }
                     }
-                }]
-            },
-            legend: {
-                display: false,
+                });
             }
-        }
-    });
+        });
+    }
 </script>
 
 </body>

@@ -33,4 +33,12 @@ public class CardServiceImpl extends BaseService implements CardService {
         }
         return cardDao.getCardList(userId);
     }
+
+    @Override
+    public Card getCardById(Integer id) {
+        if (notOk(id)){
+            return null;
+        }
+        return cardDao.getCardById(id);
+    }
 }

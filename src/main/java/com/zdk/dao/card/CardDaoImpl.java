@@ -32,4 +32,10 @@ public class CardDaoImpl implements CardDao {
         baseDao.queryRows(Card.class, selectSql, userId);
         return baseDao.queryRows(Card.class, selectSql, userId);
     }
+
+    @Override
+    public Card getCardById(Integer id) {
+        String selectSql = "select * from card where id = ?";
+        return baseDao.queryRow(Card.class, selectSql, id);
+    }
 }
