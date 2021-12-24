@@ -44,6 +44,11 @@
                                 我的银行卡
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="${active=='list.html'?'nav-link active':'nav-link'}" href="/page/files.jsp">
+                                文件
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>

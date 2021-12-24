@@ -1,38 +1,4 @@
-[2021-12-17 17:35:49.182] (com.zaxxer.hikari.HikariConfig.java:1103) logConfiguration - HikariPool-1 - configuration:
-[2021-12-17 17:35:49.195] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - allowPoolSuspension................................false
-[2021-12-17 17:35:49.195] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - autoCommit................................true
-[2021-12-17 17:35:49.195] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - catalog................................none
-[2021-12-17 17:35:49.195] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - connectionInitSql................................none
-[2021-12-17 17:35:49.196] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - connectionTestQuery................................none
-[2021-12-17 17:35:49.196] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - connectionTimeout................................30000
-[2021-12-17 17:35:49.196] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - dataSource................................none
-[2021-12-17 17:35:49.196] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - dataSourceClassName................................none
-[2021-12-17 17:35:49.196] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - dataSourceJNDI................................none
-[2021-12-17 17:35:49.197] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - dataSourceProperties................................{cacheServerConfiguration=true, useServerPrepStmts=true, elideSetAutoCommits=true, cachePrepStmts=true, rewriteBatchedStatements=true, cacheResultSetMetadata=true, useLocalSessionState=true, maintainTimeStats=false, prepStmtCacheSize=250, prepStmtCacheSqlLimit=2048, password=<masked>}
-[2021-12-17 17:35:49.198] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - driverClassName................................none
-[2021-12-17 17:35:49.198] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - exceptionOverrideClassName................................none
-[2021-12-17 17:35:49.198] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - healthCheckProperties................................{}
-[2021-12-17 17:35:49.198] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - healthCheckRegistry................................none
-[2021-12-17 17:35:49.198] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - idleTimeout................................600000
-[2021-12-17 17:35:49.198] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - initializationFailTimeout................................1
-[2021-12-17 17:35:49.198] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - isolateInternalQueries................................false
-[2021-12-17 17:35:49.199] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - jdbcUrl................................jdbc:mysql://localhost:3306/web_design?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8
-[2021-12-17 17:35:49.199] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - keepaliveTime................................0
-[2021-12-17 17:35:49.199] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - leakDetectionThreshold................................0
-[2021-12-17 17:35:49.199] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - maxLifetime................................1800000
-[2021-12-17 17:35:49.199] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - maximumPoolSize................................10
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - metricRegistry................................none
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - metricsTrackerFactory................................none
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - minimumIdle................................10
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - password................................<masked>
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - poolName................................"HikariPool-1"
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - readOnly................................false
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - registerMbeans................................false
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - scheduledExecutor................................none
-[2021-12-17 17:35:49.200] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - schema................................none
-[2021-12-17 17:35:49.201] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - threadFactory................................internal
-[2021-12-17 17:35:49.201] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - transactionIsolation................................default
-[2021-12-17 17:35:49.201] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - username................................"root"
-[2021-12-17 17:35:49.201] (com.zaxxer.hikari.HikariConfig.java:1135) logConfiguration - validationTimeout................................5000
-[2021-12-17 17:35:49.221] (com.zaxxer.hikari.util.DriverDataSource.java:107) <init> - Loaded driver with class name com.mysql.cj.jdbc.Driver for jdbcUrl=jdbc:mysql://localhost:3306/web_design?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8
-[2021-12-17 17:35:49.332] (com.zaxxer.hikari.pool.HikariPool.java:565) checkFailFast - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2002fc1d
+[2021-12-24 12:07:27.308] (MyTest.java:14) test - 测试-> abc
+[2021-12-24 12:07:49.826] (MyTest.java:14) test - 测试-> abc
+[2021-12-24 12:08:32.364] (MyTest.java:14) test - 测试-> abc
+[2021-12-24 12:09:06.684] (MyTest.java:14) test - 测试-> abc

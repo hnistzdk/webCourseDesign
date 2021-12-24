@@ -1,2 +1,4 @@
-[2021-12-17 17:35:49.202] (com.zaxxer.hikari.HikariDataSource.java:80) <init> - HikariPool-1 - Starting...
-[2021-12-17 17:35:49.333] (com.zaxxer.hikari.HikariDataSource.java:82) <init> - HikariPool-1 - Start completed.
+[2021-12-24 12:07:27.324] (MyTest.java:15) test - 测试-> 123
+[2021-12-24 12:07:49.830] (MyTest.java:15) test - 测试-> 123
+[2021-12-24 12:08:32.368] (MyTest.java:15) test - 测试-> 123
+[2021-12-24 12:09:06.690] (MyTest.java:15) test - 测试-> 123
