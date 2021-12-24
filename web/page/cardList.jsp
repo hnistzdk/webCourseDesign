@@ -63,8 +63,14 @@
             </div>
             <div class="col">
                 <form class="form-inline align-content-center" action="/card/list" id="searchForm" method="get">
-                   <input type="text" autocomplete="off" class="form-control" placeholder="输入卡号搜索" name="keywords"
-                           value=""/>
+                    <c:if test="${user.role == '管理员'}">
+                        <input type="text" autocomplete="off" class="form-control" placeholder="输入卡号或持卡人姓名搜索" name="keywords"
+                               value=""/>
+                    </c:if>
+                    <c:if test="${user.role == '普通用户'}">
+                        <input type="text" autocomplete="off" class="form-control" placeholder="输入卡号搜索" name="keywords"
+                               value=""/>
+                    </c:if>
                     <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-search"></i> 查询</button>
                     <button type="reset" data-handler="reloadCurrentPage" class="btn btn-light" ><i class="fa fa-refresh"></i> 重置</button>
                 </form>

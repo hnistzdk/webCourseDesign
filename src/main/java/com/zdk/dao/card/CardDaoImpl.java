@@ -33,8 +33,8 @@ public class CardDaoImpl implements CardDao {
         String selectSql;
         if (role.equals("管理员")){
             if (keywords != null){
-                selectSql = "select * from card where number like ?";
-                return baseDao.queryRows(Card.class, selectSql,"%"+keywords+"%");
+                selectSql = "select * from card where number like ? or owner_name like ?";
+                return baseDao.queryRows(Card.class, selectSql,"%"+keywords+"%","%"+keywords+"%");
             }
             selectSql = "select * from card";
             return baseDao.queryRows(Card.class, selectSql);
