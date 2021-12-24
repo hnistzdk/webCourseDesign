@@ -32,7 +32,7 @@ public class CardController extends BaseController{
         }
         //卡列表
         if (url.contains("/card/list")){
-            req.setAttribute("cards",cardService.getCardList(user));
+            req.setAttribute("cards",cardService.getCardList(user,getStr(req, "keywords")));
             req.getRequestDispatcher("/page/cardList.jsp").forward(req, resp);
         }
         //添加卡dialog

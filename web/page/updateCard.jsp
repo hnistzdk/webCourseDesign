@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="MyFun" uri="www.mylib.com/mylib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -64,12 +65,13 @@
 <script src="/static/js/jquery-3.5.1.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/base.js" charset="utf-8"></script>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <script>
     let tale = new $.tale();
     //编辑角色
     function updateCard() {
         $.ajax({
-            url:"/card/updateCard",
+            url:"${path}/card/updateCard",
             type:"post",
             data:$('#updateCardForm').serialize(),
             success:function (data) {

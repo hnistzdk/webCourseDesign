@@ -28,13 +28,21 @@ public class CardDaoImpl implements CardDao {
     private final BaseDao baseDao = BaseDaoImpl.getInstance();
 
     @Override
-    public List<Card> getCardList(User user) {
+    public List<Card> getCardList(User user,String keywords) {
         String role = user.getRole();
         String selectSql;
         if (role.equals("管理员")){
+            if (keywords != null){
+                selectSql = "select * from card where number like ?";
+                return baseDao.queryRows(Card.class, selectSql,"%"+keywords+"%");
+            }
             selectSql = "select * from card";
             return baseDao.queryRows(Card.class, selectSql);
         }else{
+            if (keywords != null){
+                selectSql = "select * from card where owner_id = ? and number like ?";
+                return baseDao.queryRows(Card.class, selectSql,user.getId(),"%"+keywords+"%");
+            }
             selectSql = "select * from card where owner_id = ?";
             return baseDao.queryRows(Card.class, selectSql,user.getId());
         }

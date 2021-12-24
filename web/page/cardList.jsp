@@ -15,38 +15,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>首页</title>
+    <title>我的银行卡</title>
     <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/dashboard.css" rel="stylesheet">
-    <style type="text/css">
-        /* Chart.js */
-
-        @-webkit-keyframes chartjs-render-animation {
-            from {
-                opacity: 0.99
-            }
-            to {
-                opacity: 1
-            }
-        }
-
-        @keyframes chartjs-render-animation {
-            from {
-                opacity: 0.99
-            }
-            to {
-                opacity: 1
-            }
-        }
-
-        .chartjs-render-monitor {
-            -webkit-animation: chartjs-render-animation 0.001s;
-            animation: chartjs-render-animation 0.001s;
-        }
-    </style>
+    <link href="/static/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
@@ -83,8 +57,18 @@
                     </div>
                 </div>
             </div>
-            <h2><button class="btn btn-sm btn-success" onclick="addCardDialog()">添加银行卡</button></h2>
-            <h2><button class="btn btn-sm btn-success" onclick="rechargeDialog()">转账</button></h2>
+            <div class="col">
+                <button class="btn btn-sm btn-success" onclick="addCardDialog()">添加银行卡</button>
+                <button class="btn btn-sm btn-primary" onclick="rechargeDialog()">转账</button>
+            </div>
+            <div class="col">
+                <form class="form-inline align-content-center" action="/card/list" id="searchForm" method="get">
+                   <input type="text" autocomplete="off" class="form-control" placeholder="输入卡号搜索" name="keywords"
+                           value=""/>
+                    <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-search"></i> 查询</button>
+                    <button type="reset" data-handler="reloadCurrentPage" class="btn btn-light" ><i class="fa fa-refresh"></i> 重置</button>
+                </form>
+            </div>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -121,22 +105,22 @@
 </div>
 
 
-<script type="text/javascript" src="../static/js/jquery-3.2.1.slim.min.js" ></script>
-<script type="text/javascript" src="../static/js/popper.min.js" ></script>
-<script type="text/javascript" src="../static/plugins/jbolt-admin.js"></script>
-<script type="text/javascript" src="../static/plugins/layer/layer.js"></script>
-<script src="../static/js/jquery.min.js"></script>
-<script src="../static/js/jquery-3.5.1.js"></script>
-<script src="../static/js/bootstrap.min.js"></script>
-<script src="../static/js/base.js" charset="utf-8"></script>
-
+<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js" ></script>
+<script type="text/javascript" src="/static/js/popper.min.js" ></script>
+<script type="text/javascript" src="/static/plugins/jbolt-admin.js"></script>
+<script type="text/javascript" src="/static/plugins/layer/layer.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery-3.5.1.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/base.js" charset="utf-8"></script>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <script>
     function editCardDialog(id) {
         DialogUtil.openNewDialog({
             title: "编辑银行卡信息",
             width: "50%",
-            height: "50%",
-            url: "/card/editCard/"+id,
+            height: "70%",
+            url: "${path}/card/editCard/"+id,
         })
     }
 
@@ -144,8 +128,8 @@
         DialogUtil.openNewDialog({
             title: "添加银行卡信息",
             width: "50%",
-            height: "50%",
-            url: "/card/addCard",
+            height: "70%",
+            url: "${path}/card/addCard",
         })
     }
 
@@ -153,8 +137,8 @@
         DialogUtil.openNewDialog({
             title: "转账",
             width: "50%",
-            height: "50%",
-            url: "/card/transferAccountsCard",
+            height: "70%",
+            url: "${path}/card/transferAccountsCard",
         })
     }
 
@@ -164,7 +148,7 @@
             title: '确定删除该银行卡吗?',
             then: function () {
                 $.ajax({
-                    url: '/card/deleteCard',
+                    url: '${path}/card/deleteCard',
                     type: "post",
                     data: {id: id},
                     success: function (result) {

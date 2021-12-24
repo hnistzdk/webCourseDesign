@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,12 +56,13 @@
 <script src="/static/js/jquery-3.5.1.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/base.js" charset="utf-8"></script>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <script>
     let tale = new $.tale();
     //编辑角色
     function addCard() {
         $.ajax({
-            url:"/card/add",
+            url:"${path}/card/add",
             type:"post",
             data:$('#addCardForm').serialize(),
             success:function (data) {
@@ -82,7 +84,7 @@
 
     function checkCard() {
         let cardNumber = $('#number').val();
-        let url = "/card/getCardByCardNum/"+cardNumber;
+        let url = "${path}/card/getCardByCardNum/"+cardNumber;
         $.ajax({
             url:url,
             type:"get",

@@ -29,11 +29,11 @@ public class CardServiceImpl extends BaseService implements CardService {
 
     private final CardDao cardDao = CardDaoImpl.getInstance();
     @Override
-    public List<Card> getCardList(User user) {
+    public List<Card> getCardList(User user,String keywords) {
         if (notOk(user)){
             return null;
         }
-        return cardDao.getCardList(user);
+        return cardDao.getCardList(user,keywords);
     }
 
     @Override

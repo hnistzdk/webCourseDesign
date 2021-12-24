@@ -13,11 +13,12 @@ import java.util.List;
  */
 public interface CardDao {
     /**
-     * 银行卡分页
-     * @param userId
+     * 银行卡列表
+     * @param user
+     * @param keywords
      * @return
      */
-    List<Card> getCardList(User user);
+    List<Card> getCardList(User user,String keywords);
 
     /**
      * 根据id获取卡信息

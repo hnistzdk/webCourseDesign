@@ -14,10 +14,11 @@ import java.util.List;
 public interface CardService {
     /**
      * 银行卡List
-     * @param userId
+     * @param user
+     * @param keywords
      * @return
      */
-    List<Card> getCardList(User user);
+    List<Card> getCardList(User user,String keywords);
 
     /**
      * 根据id获取卡信息
