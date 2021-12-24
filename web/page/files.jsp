@@ -15,8 +15,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link href="//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css" rel="stylesheet"/>
+    <script src="//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="/static/css/dashboard.css" rel="stylesheet">
 </head>
@@ -83,8 +88,8 @@
 
             <div>
                 <h2>下载文件</h2>
-                <c:forEach items="${files}" var="name">
-                    <a href="/download/${name}">${name }</a><br/>
+                <c:forEach items="${fileNameMap}" var="file">
+                    <a href="/download/${file.key}">${file.key}</a><br/>
                 </c:forEach>
             </div>
         </main>
@@ -92,9 +97,8 @@
 </div>
 </body>
 </html>
-<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js" ></script>
+<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
 <script type="text/javascript" src="/static/js/popper.min.js" ></script>
-<%--<script src="../static/js/jquery.min.js"></script>--%>
 <script src="/static/js/jquery-3.5.1.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/base.js" charset="utf-8"></script>

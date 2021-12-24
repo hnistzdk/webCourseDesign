@@ -1,5 +1,6 @@
 package com.zdk.controllers;
 
+import cn.hutool.core.lang.UUID;
 import com.zdk.utils.ApiResponse;
 
 import javax.servlet.ServletException;
@@ -13,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @Description
@@ -28,7 +28,7 @@ public class FileUploadController extends BaseController {
         String url = req.getRequestURL().toString();
         if (url.contains("/fileList")){
             //获取上传文件的目录
-            String uploadFilePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+            String uploadFilePath = System.getProperty("user.dir")+"\\upload\\";
             //存储要下载的文件名
             Map<String,String> fileNameMap = new HashMap<>(16);
             //递归遍历filepath目录下的所有文件和目录，将文件的文件名存储到map集合中
@@ -36,7 +36,7 @@ public class FileUploadController extends BaseController {
             listFile(new File(uploadFilePath),fileNameMap);
             //将Map集合发送到files.jsp页面进行显示
             req.setAttribute("fileNameMap", fileNameMap);
-            req.getRequestDispatcher("/files.jsp").forward(req, resp);
+            req.getRequestDispatcher("/page/files.jsp").forward(req, resp);
         }
     }
 
@@ -45,17 +45,9 @@ public class FileUploadController extends BaseController {
         try {
             //获取上传的文件
             Part part = req.getPart("file");
-            String realPath = req.getSession().getServletContext().getRealPath("/web");
-            //获取请求的信息
-            String name = part.getHeader("content-disposition");
-
-            //获取文件的后缀
-            String str = name.substring(name.lastIndexOf("."), name.length() - 1);
-            //生成一个新的文件名，不重复，数据库存储的就是这个文件名，不重复的
-            String fname = UUID.randomUUID() + str;
-            String filename = System.getProperty("user.dir")+"\\web\\WEB-INF\\upload\\"+fname;
-            System.out.println("测试产生新的文件名：" + filename);
-            //上传文件到指定目录，不想上传文件就不调用这个
+            String fileName = getFileName(part);
+            fileName= UUID.randomUUID().toString().substring(1,5)+"-"+fileName;
+            String filename = System.getProperty("user.dir")+"\\upload\\"+fileName;
             part.write(filename);
             returnJson(resp, ApiResponse.success("文件上传成功"));
         } catch (Exception e) {
@@ -87,9 +79,20 @@ public class FileUploadController extends BaseController {
              file.getName().indexOf("_")检索字符串中第一次出现"_"字符的位置，如果文件名类似于：9349249849-88343-8344_阿_凡_达.avi
              那么file.getName().substring(file.getName().indexOf("_")+1)处理之后就可以得到阿_凡_达.avi部分
              */
-            String realName = file.getName().substring(file.getName().indexOf("_")+1);
+            String realName = file.getName().substring(file.getName().indexOf("-")+1);
             //file.getName()得到的是文件的原始名称，这个名称是唯一的，因此可以作为key，realName是处理过后的名称，有可能会重复
             map.put(file.getName(), realName);
         }
+    }
+
+    public String getFileName(Part part){
+        if (part == null){
+            return null;
+        }
+        String fileName = part.getHeader("content-disposition");
+        if (fileName.lastIndexOf("=")+2 == fileName.length()-1){
+            return null;
+        }
+        return fileName.substring(fileName.lastIndexOf("=")+2,fileName.length()-1);
     }
 }

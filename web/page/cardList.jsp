@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="${active=='list.html'?'nav-link active':'nav-link'}" href="/page/files.jsp">
+                            <a class="${active=='list.html'?'nav-link active':'nav-link'}" href="/fileList">
                                 文件
                             </a>
                         </li>
