@@ -85,14 +85,14 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
+                <h1 class="h2">网上银行管理系统</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <a class="nav-link" href="/user/logout">注销</a>
                     </div>
                 </div>
             </div>
-            <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
+            <canvas class="my-4 chartjs-render-monitor" style="display: block;background: url('/static/img/bg1.jfif');width: 1200px; height: 590px;"></canvas>
         </main>
     </div>
 </div>
@@ -108,38 +108,6 @@
 <script type="text/javascript" src="../static/js/feather.min.js" ></script>
 <script>
     feather.replace()
-</script>
-
-<!-- Graphs -->
-<script type="text/javascript" src="../static/js/Chart.min.js" ></script>
-<script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            legend: {
-                display: false,
-            }
-        }
-    });
 </script>
 
 </body>

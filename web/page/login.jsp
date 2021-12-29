@@ -22,7 +22,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 </head>
-<body class="text-center">
+<body class="text-center" style="background: url('/static/img/bg2.jfif')">
 <form id="loginForm" class="form-signin" onsubmit="return false">
     <img class="mb-4" src="../static/img/logo.jpg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal" content="请登录">网上银行系统</h1>
@@ -43,9 +43,9 @@
         </div>
     </div>
     <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="rememberMe" value="remember-me">记住我
-        </label>
+<%--        <label>--%>
+<%--            <input type="checkbox" name="rememberMe" value="remember-me">记住我--%>
+<%--        </label>--%>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="checkForm()">登录</button>
     <a class="btn btn-lg btn-primary btn-block" href="/page/register.jsp">注册</a>

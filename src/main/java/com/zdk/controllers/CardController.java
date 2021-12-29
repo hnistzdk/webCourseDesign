@@ -78,8 +78,8 @@ public class CardController extends BaseController{
                 returnJson(resp, ApiResponse.fail("参数错误"));
                 return;
             }
-            int money = (int) (Float.parseFloat(recharge)) *100;
-            int balanceMoney = (int) (Float.parseFloat(balance)) *100;
+            int money = (int) (Float.parseFloat(recharge) *100);
+            int balanceMoney = (int) (Float.parseFloat(balance) *100);
             returnJson(resp, cardService.recharge(id, money,balanceMoney));
         }
         //添加卡
@@ -123,7 +123,7 @@ public class CardController extends BaseController{
         if (notOk(origin) || notOk(target)){
             return ApiResponse.fail("参数错误");
         }
-        int money = (int) (Float.parseFloat(s)) *100;
+        int money = (int) (Float.parseFloat(s)*100);
         Card originCard = cardService.getCardByNumber(origin);
         if (originCard == null){
             return ApiResponse.fail("源卡号不存在");
