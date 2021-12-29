@@ -61,7 +61,6 @@
 
 <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js" ></script>
 <script type="text/javascript" src="/static/js/popper.min.js" ></script>
-<%--<script src="../static/js/jquery.min.js"></script>--%>
 <script src="/static/js/jquery-3.5.1.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/base.js" charset="utf-8"></script>

@@ -34,10 +34,6 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="${active=='main.html'?'nav-link active':'nav-link'}" href="/page/index.jsp">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
                                 首页 <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -68,29 +64,43 @@
             <!-- 上传文件是以文件转换为二进制流的形式上传的 -->
             <!-- enctype="multipart/form-data"需要设置在form里面，否则无法提交文件 -->
             <form id="fileUploadForm" method="post">
-                <table>
+                <table class="table table-striped table-sm">
                     <tr>
                         <td></td>
                         <td><h1>文件上传</h1></td>
                     </tr>
                     <tr>
                         <td>上传文件:</td>
-                        <td><input id="file" type="file" name="file"/></td>
-                        <input type="hidden" id="filename" name="filename">
+                        <td><input class="btn btn-sm btn-primary" id="file" type="file" name="file"/></td>
+                        <td><input type="hidden" id="filename" name="filename"></td>
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" onclick="upload()" value="上传文件">上传</button>
+                            <button class="btn btn-sm btn-primary" type="button" onclick="upload()" value="上传文件">上传</button>
                         </td>
                     </tr>
                 </table>
             </form>
-
-            <div>
+            <div class="table-responsive">
                 <h2>下载文件</h2>
-                <c:forEach items="${fileNameMap}" var="file">
-                    <a href="/download/${file.key}">${file.key}</a><br/>
-                </c:forEach>
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="file" items="${fileNameMap}" varStatus="status">
+                        <tr>
+                            <td>${file.key}</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="/download/?filename=${file.key}">下载</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </main>
     </div>
@@ -122,7 +132,8 @@
                         text: data.msg,
                         then: function () {
                             setTimeout(function () {
-                                parent.reloadCurrentPage()
+                                // parent.parent.reloadCurrentPage()
+                                window.location.reload();
                             }, 500);
                         }
                     })

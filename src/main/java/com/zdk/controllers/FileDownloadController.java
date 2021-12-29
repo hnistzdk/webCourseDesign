@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @Description
@@ -24,23 +25,26 @@ public class FileDownloadController extends BaseController{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String url = req.getRequestURL().toString();
-        String fileName = url.substring(url.lastIndexOf("/") + 1);
+        String fileName = getStr(req, "filename");
         File f = new File(System.getProperty("user.dir")+"\\upload\\"+fileName);
         if(f.exists()){
             FileInputStream fis = new FileInputStream(f);
             //解决中文文件名下载后乱码的问题
             String filename= URLEncoder.encode(f.getName(),"utf-8");
-            byte[] b = new byte[fis.available()];
-            fis.read(b);
             resp.setCharacterEncoding("utf-8");
-            resp.setHeader("Content-Disposition","attachment; filename="+filename+"");
+            resp.setHeader("Content-Disposition","attachment; filename="+filename);
+            resp.setHeader("Content-type", "application/x-msdownload");
             //获取响应报文输出流对象
             ServletOutputStream out =resp.getOutputStream();
-            //输出
-            out.write(b);
+            out.flush();
+            int temp;
+            byte[] b = new byte[1024];
+            while ((temp = fis.read(b)) != -1){
+                out.write(b,0,temp);
+            }
             out.flush();
             out.close();
+            fis.close();
         }
     }
 }
